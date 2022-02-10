@@ -28,7 +28,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .mvcMatchers("/app/api/recipe/*").authenticated()
+                .mvcMatchers("/api/recipe/*").authenticated()
                 .anyRequest().permitAll() // make remaining endpoints public (including POST /register)
                 .and()
                 .csrf().disable() // disabling CSRF will allow sending POST request using Postman

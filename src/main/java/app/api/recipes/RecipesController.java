@@ -1,13 +1,12 @@
 package app.api.recipes;
 
-import app.api.users.UsersController;
 import app.domain.recipes.InvalidRecipeAuthorException;
 import app.domain.recipes.InvalidRecipeDetailsException;
 import app.domain.recipes.RecipeNotFoundException;
 import app.domain.recipes.RecipesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/recipe")
 public class RecipesController {
 
-    Logger logger = LoggerFactory.getLogger(UsersController.class);
+    Logger logger = LoggerFactory.getLogger(RecipesController.class);
     private final RecipesService recipesService;
 
     public RecipesController(RecipesService recipesService) {
@@ -56,9 +55,10 @@ public class RecipesController {
     }
 
     @PostMapping("/new")
-    public Map<String, Long>  addRecipe(@AuthenticationPrincipal UserDetails details, @RequestBody RecipeDto recipe) {
+    public Map<String, Long>  addRecipe(@RequestBody RecipeDto recipe) {
 
         try {
+            var details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             var id = recipesService.addRecipe(
                 details.getUsername(),
                 recipe.getName(),
@@ -80,9 +80,10 @@ public class RecipesController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteRecipe(@AuthenticationPrincipal UserDetails details, @PathVariable Long id) {
+    public void deleteRecipe(@PathVariable Long id) {
 
        try {
+           var details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
            recipesService.deleteRecipe(id, details.getUsername());
        } catch (RecipeNotFoundException ex) {
            logger.error(ex.getMessage());
@@ -99,9 +100,10 @@ public class RecipesController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void putRecipe(@AuthenticationPrincipal UserDetails details, @PathVariable Long id, @RequestBody RecipeDto recipe) {
+    public void putRecipe(@PathVariable Long id, @RequestBody RecipeDto recipe) {
 
         try {
+            var details = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             recipesService.updateRecipe(
                     id,
                     details.getUsername(),
