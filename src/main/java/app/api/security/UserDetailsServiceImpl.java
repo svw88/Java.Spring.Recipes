@@ -1,4 +1,4 @@
-package app.api.users;
+package app.api.security;
 
 import app.domain.users.UsersService;
 import org.springframework.security.core.userdetails.UserDetails;
