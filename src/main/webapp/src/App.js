@@ -10,6 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 // Material Kit 2 React themes
 import theme from "assets/theme";
 import Register from "layouts/register";
+import EditRecipe from "layouts/edit-recipe";
 
 // Material Kit 2 React routes
 import routes from "routes";
@@ -44,6 +45,7 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         <Route path="/register" element={<Register />} />
+        <Route path="/edit-recipe" element={<EditRecipe />} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </ThemeProvider>

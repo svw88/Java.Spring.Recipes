@@ -26,8 +26,7 @@ export default {
     select: {
       display: "grid",
       alignItems: "center",
-      padding: `0 ${pxToRem(12)} !important`,
-
+      minHeight: 20,
       "& .Mui-selected": {
         backgroundColor: transparent.main,
       },

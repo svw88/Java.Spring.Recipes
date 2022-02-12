@@ -17,9 +17,7 @@ import MKButton from "components/MKButton";
 import {useNavigate} from 'react-router-dom';
 
 function Register() {
-  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const handleRegisterClick = () => navigate('/sign-in', {replace: true});
   return (
     <>

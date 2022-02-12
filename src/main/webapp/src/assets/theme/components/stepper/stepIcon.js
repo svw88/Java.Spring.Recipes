@@ -25,9 +25,9 @@ const { white } = colors;
 export default {
   styleOverrides: {
     root: {
-      background: "#9fc9ff",
-      fill: "#9fc9ff",
-      stroke: "#9fc9ff",
+      background: "#586476",
+      fill: "#586476",
+      stroke: "#586476",
       strokeWidth: pxToRem(10),
       width: pxToRem(13),
       height: pxToRem(13),

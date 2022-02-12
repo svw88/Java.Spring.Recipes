@@ -30,7 +30,7 @@ export default {
       marginTop: `${pxToRem(8)} !important`,
       fontWeight: fontWeightRegular,
       fontSize: size.xs,
-      color: "#9fc9ff",
+      color: "#586476",
       textTransform: "uppercase",
 
       "&.Mui-active": {
